@@ -1,0 +1,17 @@
+<h1>My Applications</h1>
+
+{% for application in applications %}
+
+<div>
+    <h2>{{ application.job.title }}</h2>
+    <p><strong>Company:</strong> {{ application.job.company }}</p>
+    <p><strong>Applied At:</strong> {{ application.applied_at }}</p>
+</div>
+
+<hr>
+
+{% empty %}
+
+<p>You have not applied to any jobs yet.</p>
+
+{% endfor %}
