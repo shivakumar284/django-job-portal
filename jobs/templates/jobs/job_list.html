@@ -1,11 +1,35 @@
-<a href="{%url 'my_applications'%}">My Applications</a>
+{% load static %}
+
+<html>
+<head>
+  <title>Job Portal</title>
+  <link rel="stylesheet" href="{% static 'jobs/style.css' %}">
+</head>
+<body>
+<div class="navbar">
+
+{% if user.is_authenticated %}
+  <p>Welcome {{ user.username }}</p>
+  <a href="{% url 'logout' %}">Logout</a>
+  <a href="{% url 'my_applications' %}">My Applications</a>
+{% else %}
+  <a href="/login/">Login</a>
+  <a href="/register/">Register</a>
+{% endif %}
+</div>
+
+<div class="container">
 <h1>Available Jobs</h1>
 {% for job in jobs %}
-  <div>
-    <h2><a href="{%url 'job_detail' job.id %}">{{job.title}}</a></h2>
-    <p>{{job.description}}</p>
-    <p><strong>Company:</strong>{{job.company}}</p>
-    <p><strong>Location:</strong>{{job.location}}</p>
-  </div>
-  <hr>
+<div>
+  <h2><a href="{%url 'job_detail' job.id %}">{{job.title}}</a></h2>
+  <p>{{job.description}}</p>
+  <p><strong>Company:</strong>{{job.company}}</p>
+  <p><strong>Location:</strong>{{job.location}}</p>
+</div>
 {% endfor %}
+  
+</div>
+</body>
+</html>
+
