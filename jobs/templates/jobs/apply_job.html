@@ -1,0 +1,11 @@
+<h2>Apply for {{ job.title }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <textarea name="cover_letter" placeholder="Write your cover letter"></textarea>
+
+    <br><br>
+
+    <button type="submit">Submit Application</button>
+</form>
