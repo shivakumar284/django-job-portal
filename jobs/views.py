@@ -5,12 +5,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.db.models import Q
 #from rest_framework import viewsets
 #from .serializers import Applicationserializer
 # Create your views here.
 def job_list(request):
-  jobs= Job.objects.all()
+  query=request.GET.get('q')
+  if query:
+    jobs=Job.objects.filter(Q(title__icontains=query)|Q(company__icontains=query)|Q(location__icontains=query))
+  else:  
+    jobs= Job.objects.all()
   return render(request,"jobs/job_list.html",{"jobs":jobs})
+
 
 def job_detail(request, job_id):
     job = get_object_or_404(Job, id=job_id)
